@@ -1,18 +1,29 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import LandingPage from './pages/LandingPage';
-import MainApp from './pages/MainApp';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { ConsentScreen } from './components/ConsentScreen';
+import { JudgmentApp } from './components/JudgementApp';
+
+function AppContent() {
+  const navigate = useNavigate();
+
+  return (
+    <Routes>
+      <Route 
+        path="/" 
+        element={<ConsentScreen onConsent={() => navigate('/app')} />} 
+      />
+      <Route 
+        path="/app" 
+        element={<JudgmentApp onExit={() => navigate('/')} />} 
+      />
+    </Routes>
+  );
+}
 
 function App() {
   return (
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/app" element={<MainApp />} />
-        </Routes>
-      </Layout>
+      <AppContent />
     </Router>
   );
 }
