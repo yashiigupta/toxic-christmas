@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/judge';
+const API_URL = 'https://toxic-christmas-backend.onrender.com/api/judge';
 
 export const getJudgment = async (data) => {
   try {
